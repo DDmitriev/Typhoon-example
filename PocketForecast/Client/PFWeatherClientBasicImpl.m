@@ -87,7 +87,8 @@
         @"q"           : city,
         @"format"      : @"xml",
         @"num_of_days" : [NSString stringWithFormat:@"%i", _daysToRetrieve],
-        @"key"         : _apiKey
+        @"key"         : _apiKey,
+        @"tp": @"24"
     }];
     return url;
 }

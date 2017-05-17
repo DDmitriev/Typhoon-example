@@ -300,11 +300,11 @@
         {
             return [UIImage imageNamed:@"icon_cloudy"];
         }
-        else if ([imageUri hasSuffix:@"light_rain_showers.png"])
+        else if ([imageUri hasSuffix:@"rain.png"])
         {
             return [UIImage imageNamed:@"icon_rainy"];
         }
-        else if ([imageUri hasSuffix:@"heavy_rain_showers.png"])
+        else if ([imageUri hasSuffix:@"showers.png& "])
         {
             return [UIImage imageNamed:@"icon_rainy"];
         }
