@@ -66,6 +66,9 @@
     [_validationMessage setFont:[UIFont applicationFontOfSize:16]];
 
     [self setTitle:@"Add City"];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAdding:)];
     [_nameOfCityToAdd becomeFirstResponder];
@@ -88,6 +91,12 @@
 //-------------------------------------------------------------------------------------------
 #pragma mark - Private Methods
 //-------------------------------------------------------------------------------------------
+
+- (void)cancel:(id)sender
+{
+    [_nameOfCityToAdd resignFirstResponder];
+    [_rootViewController dismissAddCitiesController];
+}
 
 - (void)doneAdding:(id)sender
 {

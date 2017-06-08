@@ -66,7 +66,4 @@ typedef enum
 
 - (void)dismissAddCitiesController;
 
-- (void)toggleSideViewController;
-
-
 @end

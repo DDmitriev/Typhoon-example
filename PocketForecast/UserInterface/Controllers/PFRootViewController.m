@@ -83,83 +83,30 @@
 
 - (void)showCitiesListController
 {
-    if (_sideViewState != PFSideViewStateShowing)
-    {
-        _sideViewState = PFSideViewStateShowing;
-
+    if (!_citiesListController) {
         _citiesListController = [[UINavigationController alloc] initWithRootViewController:[_assembly citiesListController]];
-
-        [_citiesListController.view setFrame:CGRectMake(0, 0,
-            _mainContentViewContainer.width - (_mainContentViewContainer.width - SIDE_CONTROLLER_WIDTH), _mainContentViewContainer.height)];
-
-        [self.view setDelegate:self];
-        [self.view setLeftFoldContentView:_citiesListController.view foldCount:5 pullFactor:0.9];
-        [self.view setPaperFoldState:PaperFoldStateLeftUnfolded];
-
-        [_mainContentViewContainer setNeedsDisplay];
     }
+    [self presentViewController:_citiesListController animated:YES completion:nil];
 }
 
 - (void)dismissCitiesListController
 {
-    if (_sideViewState != PFSideViewStateHidden)
-    {
-        _sideViewState = PFSideViewStateHidden;
-        [self.view setPaperFoldState:PaperFoldStateDefault];
-        [_navigator.topViewController viewWillAppear:YES];
-    }
+    [_citiesListController dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)toggleSideViewController
-{
-    if (_sideViewState == PFSideViewStateHidden)
-    {
-        [self showCitiesListController];
-    }
-    else if (_sideViewState == PFSideViewStateShowing)
-    {
-        [self dismissCitiesListController];
-    }
-}
-
 
 - (void)showAddCitiesController
 {
     if (!_addCitiesController)
     {
-        [_navigator.topViewController.view setUserInteractionEnabled:NO];
         _addCitiesController = [[UINavigationController alloc] initWithRootViewController:[_assembly addCityViewController]];
-
-        [_addCitiesController.view setFrame:CGRectMake(0, self.view.height, SIDE_CONTROLLER_WIDTH, self.view.height)];
-        [self.view addSubview:_addCitiesController.view];
-
-        __block CGRect frame = _citiesListController.view.frame;
-        [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^
-        {
-            frame.origin.y = 0;
-            _addCitiesController.view.frame = frame;
-        } completion:nil];
     }
+
+    [_citiesListController presentViewController:_addCitiesController animated:YES completion:nil];
 }
 
 - (void)dismissAddCitiesController
 {
-    if (_addCitiesController)
-    {
-        [_citiesListController viewWillAppear:YES];
-        __block CGRect frame = _citiesListController.view.frame;
-        [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^
-        {
-            frame.origin.y += self.view.height;
-            _addCitiesController.view.frame = frame;
-        } completion:^(BOOL finished)
-        {
-            [_addCitiesController.view removeFromSuperview];
-            _addCitiesController = nil;
-            [_citiesListController viewDidAppear:YES];
-            [_navigator.topViewController.view setUserInteractionEnabled:YES];
-        }];
-    }
+    [_addCitiesController dismissViewControllerAnimated:YES completion:nil];
 }
 
 //-------------------------------------------------------------------------------------------

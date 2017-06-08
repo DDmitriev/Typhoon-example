@@ -139,13 +139,13 @@
         cell = [[PFForecastTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
 
+    cell.separatorView.hidden = indexPath.row == 0;
     [cell.dayLabel setText:forecastConditions.longDayOfTheWeek];
     [cell.descriptionLabel setText:forecastConditions.summary];
     [cell.lowTempLabel setText:[forecastConditions.low asShortStringInDefaultUnits]];
     [cell.highTempLabel setText:[forecastConditions.high asShortStringInDefaultUnits]];
     [cell.conditionsIcon setImage:[self uiImageForImageUri:forecastConditions.imageUri]];
 
-    [cell.backgroundView setBackgroundColor:[self colorForRow:indexPath.row]];
     return cell;
 }
 
@@ -264,19 +264,6 @@
 }
 
 //-------------------------------------------------------------------------------------------
-
-- (UIColor *)colorForRow:(NSUInteger)row
-{
-    switch (row)
-    {
-        case 0:
-            return [_theme.forecastTintColor colorWithAlphaComponent:0.55];
-        case 1:
-            return [_theme.forecastTintColor colorWithAlphaComponent:0.75];
-        default:
-            return [_theme.forecastTintColor colorWithAlphaComponent:0.95];
-    }
-}
 
 - (UIImage *)uiImageForImageUri:(NSString *)imageUri
 {

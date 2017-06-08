@@ -26,7 +26,7 @@
     if (self)
     {
         [self initBackgroundView];
-        [self initOverlay];
+        [self initSeparatorView];
         [self initConditionsIcon];
         [self initDayLabel];
         [self initDescriptionLabel];
@@ -44,16 +44,17 @@
 - (void)initBackgroundView
 {
     UIView* backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-    [backgroundView setBackgroundColor:[UIColor colorWithHexRGB:0x837758]];
+    [backgroundView setBackgroundColor:[UIColor colorWithHexRGB:0x343546 alpha:0.77]];
     [self setBackgroundView:backgroundView];
 }
 
-- (void)initOverlay
+- (void)initSeparatorView
 {
-    _overlayView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-    [_overlayView setImage:[UIImage imageNamed:@"cell_fade"]];
-    [_overlayView setContentMode:UIViewContentModeScaleToFill];
-    [self addSubview:_overlayView];
+    CGFloat height = 0.5;
+    CGFloat xOffset = 70;
+    _separatorView = [[UIView alloc] initWithFrame:CGRectMake(xOffset, CGRectGetMinY(self.bounds) + height, CGRectGetWidth(self.bounds) - xOffset, height)];
+    [_separatorView setBackgroundColor:[UIColor colorWithHexRGB:0xb3b3b3]];
+    [self addSubview:_separatorView];
 }
 
 - (void)initConditionsIcon
@@ -78,7 +79,7 @@
 {
     _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 28, 150, 16)];
     [_descriptionLabel setFont:[UIFont applicationFontOfSize:13]];
-    [_descriptionLabel setTextColor:[UIColor colorWithHexRGB:0xe9e1cd]];
+    [_descriptionLabel setTextColor:[UIColor colorWithHexRGB:0xb3b3b3]];
     [_descriptionLabel setBackgroundColor:[UIColor clearColor]];
     [self addSubview:_descriptionLabel];
 }
@@ -97,7 +98,7 @@
 {
     _lowTempLabel = [[UILabel alloc] initWithFrame:CGRectMake(270, 11.5, 40, 30)];
     [_lowTempLabel setFont:[UIFont temperatureFontOfSize:20]];
-    [_lowTempLabel setTextColor:[UIColor colorWithHexRGB:0xd9d1bd]];
+    [_lowTempLabel setTextColor:[UIColor colorWithHexRGB:0xb3b3b3]];
     [_lowTempLabel setBackgroundColor:[UIColor clearColor]];
     [_lowTempLabel setTextAlignment:NSTextAlignmentRight];
     [self addSubview:_lowTempLabel];

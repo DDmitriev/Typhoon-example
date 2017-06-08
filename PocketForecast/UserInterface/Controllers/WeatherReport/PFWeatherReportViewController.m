@@ -122,10 +122,7 @@
 
 - (void)presentMenu
 {
-    //Here we could have injected the root controller itself, however its useful to see the TyphoonComponentFactory itself being injected,
-    //and posing behind an assembly interface.
-
-    [[_assembly rootViewController] toggleSideViewController];
+    [[_assembly rootViewController] showCitiesListController];
 }
 
 

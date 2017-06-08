@@ -20,7 +20,7 @@
 #import "PFRootViewController.h"
 #import "PFTheme.h"
 #import "PFApplicationAssembly.h"
-
+#import "NanoFrame.h"
 
 static int const CELSIUS_SEGMENT_INDEX = 0;
 static int const FAHRENHEIT_SEGMENT_INDEX = 1;
@@ -58,10 +58,14 @@ static int const FAHRENHEIT_SEGMENT_INDEX = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"Pocket Forecast"];
+    [self setTitle:@"Cities"];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-        initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCity)];
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCity)];
+
     [_citiesListTableView setEditing:YES];
 
     [_temperatureUnitsControl addTarget:self action:@selector(saveTemperatureUnitPreference)
@@ -159,6 +163,12 @@ static int const FAHRENHEIT_SEGMENT_INDEX = 1;
 //-------------------------------------------------------------------------------------------
 
 
+- (void)cancel
+{
+    PFRootViewController *controller = [_assembly rootViewController];
+    [controller dismissCitiesListController];
+}
+
 - (void)addCity
 {
     PFRootViewController *rootViewController = [_assembly rootViewController];
@@ -184,7 +194,7 @@ static int const FAHRENHEIT_SEGMENT_INDEX = 1;
 
 - (void)applyTheme
 {
-    [_temperatureUnitsControl setTintColor:_theme.controlTintColor];
+    [_temperatureUnitsControl setTintColor:[UIColor colorWithHexRGB:0x5d6a72]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setBarTintColor:_theme.navigationBarColor];
 }

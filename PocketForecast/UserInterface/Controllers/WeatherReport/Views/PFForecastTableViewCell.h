@@ -16,9 +16,9 @@
 
 @interface PFForecastTableViewCell : UITableViewCell
 {
-    UIImageView *_overlayView;
 }
 
+@property(nonatomic, strong, readonly) UIView *separatorView;
 @property(nonatomic, strong, readonly) UILabel *dayLabel;
 @property(nonatomic, strong, readonly) UILabel *descriptionLabel;
 @property(nonatomic, strong, readonly) UILabel *highTempLabel;
